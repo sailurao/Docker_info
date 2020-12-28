@@ -32,3 +32,12 @@ services:
        - '8081:80'
       environment:
         PMA_HOST: mysql-dev-server
+
+
+   react-example1-app:
+      image: naga1972/react-example1
+      container_name: react-example1-app
+      restart: always
+      ports:
+       - '3000:3000'
+   
