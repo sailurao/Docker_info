@@ -1,0 +1,34 @@
+version: '3.2'
+
+services:
+   mysql-dev-server:
+      image: naga1972/mycustom_sql_img
+      container_name: mysql-dev-server
+      restart: always
+      ports:
+       - '3306:3306'
+      environment:
+        MYSQL_ROOT_PASSWORD: Java2020
+
+
+   mySpringBootRest1:
+      depends_on:
+       - mysql-dev-server
+      image: naga1972/spring-boot-rest1-img
+      container_name: mySpringBootRest1
+      restart: always
+      ports:
+       - '8080:8080'
+      environment:
+        PMA_HOST: mysql-dev-server
+
+   phpmyadmin:
+      depends_on:
+       - mysql-dev-server
+      image: phpmyadmin/phpmyadmin
+      container_name: phpmyadmin
+      restart: always
+      ports:
+       - '8081:80'
+      environment:
+        PMA_HOST: mysql-dev-server
